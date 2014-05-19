@@ -8,7 +8,7 @@ try:
 except ImportError:
     argcomplete = None
 
-DEFAULT_RC_FILE = "defaultrc.py"
+DEFAULT_RC_FILE = "defchar_lwr.py"
 DEFAULT_PLUGINS = ["pre", "make_mc_input", "run_transport", "post", "test"]
 
 def main():

@@ -56,22 +56,27 @@ class XSGenPlugin(Plugin):
                       'torque': Pbs,
                       }
 
-        # Get the run controller
-        runner = run_switch[rc.scheduler]
-        rc.runchar = runner(n_code, rc)
 
         from mock import Mock
         NCodeSerpent = Mock()
+
+        from n_code_openmc import NCodeOpenMC
 
         # Set the neutronics code
         n_code_switch = {'': NCodeSerpent,
                          'sss': NCodeSerpent,
                          'Serpent': NCodeSerpent,
                          'serpent': NCodeSerpent,
+                         'openmc': NCodeOpenMC
+                         'OpenMC': NCodeOpenMC
                          }
         n_coder = n_code_switch[rc.transporter]
         n_code = n_coder(rc)
         rc.n_code = n_code
+
+        # Get the run controller
+        runner = run_switch[rc.scheduler]
+        rc.runchar = runner(rc.n_code, rc)
 
     def execute(self, rc):
         if rc.UI:

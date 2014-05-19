@@ -29,12 +29,7 @@ from char.tally_types import restricted_tallies
 np.seterr(divide='ignore')
 
 # Setup serpent running
-try:
-    import serpent
-except ImportError:
-    import mock
-    print("No serpent, mocking!")
-    serpent = mock.Mock()
+import serpent
 
 def run_serpent_subprocess(argstr):
     rtn = subprocess.check_call('sss-dev ' + argstr, shell=True)

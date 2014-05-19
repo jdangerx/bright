@@ -8,7 +8,7 @@ class XSGenPlugin(Plugin):
     def execute(self, rc):
         # Get the run controller
         runner = run_switch[rc.scheduler]
-        runchar = runner(n_code, rc)
+        runchar = runner(rc.n_code, rc)
 
         run_switch = {'': Bash,
                       'BASH': Bash,

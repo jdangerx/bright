@@ -52,7 +52,7 @@ class XSGenPlugin(Plugin):
                 rc.runchar.run_remotely()
 
         elif rc.RUN_ANALYSIS:
-            n_code.analyze_deltam()
+            rc.n_code.analyze_deltam()
 
         elif rc.RUN_BURNUP or rc.RUN_XS_GEN or rc.RUN_DELTAM:
             # Make tranumatrion libraries by executing the as a separate step from 
@@ -66,7 +66,7 @@ class XSGenPlugin(Plugin):
 
             # Run initial nuclide sensitivity calculation
             if rc.RUN_DELTAM:
-                n_code.run_deltam_pert(idx, ihm_isos, sidx)
+                rc.n_code.run_deltam_pert(idx, ihm_isos, sidx)
 
         elif rc.FETCH_FILES:
             # Fetches files from remote server
