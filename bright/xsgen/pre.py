@@ -24,6 +24,7 @@ class XSGenPlugin(Plugin):
                  "RUN_XS_GEN": False,
                  "RUN_DELTAM": False,
                  "RUN_ANALYSIS": False,
+                 "ABSPATH": "defaultrc.py",
     }
 
     def update_argparser(self, parser):

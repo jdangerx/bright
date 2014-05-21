@@ -3,19 +3,19 @@
 #############################
 reactor = "lwr"
 burn_regions = 1                                # Number of burnup annular regions.
-burn_time   = 4200								# Number of days to burn the material [days]
-time_step = 525								# Coarse Time step by which to increment the burn, for MCNP [days]
-email      = "scopatz@gmail.com"		    	# E-mail address to send job information to.
+burn_time = 4200                                # Number of days to burn the material [days]
+time_step = 525                                 # Coarse Time step by which to increment the burn, for MCNP [days]
+email = "scopatz@gmail.com"                     # E-mail address to send job information to.
 
 scheduler = "PBS"
 
 number_cpus   = 3   # Number of CPUs to run transport code on.
 cpus_per_node = 4   # Processors per node
 
-verbosity = 100
+verbosity = 10
 
 # Set isotopes to track
-from char.iso_track import load, transmute
+from nuc_track import load, transmute
 core_load_isos      = load           # Initial core loading nuclide list or file
 core_transmute_isos = transmute      # Transmutation tracking nuclide list or file
 
@@ -33,7 +33,6 @@ burnup_template = serpent.burnup
 fuel_cell_radius = 0.410
 void_cell_radius = 0.4185
 clad_cell_radius = 0.475
-unit_cell_pitch  = 0.65635 * 2.0
 unit_cell_height = 10.0
 
 #fuel_density = [10.7, 10.7*0.9, 10.7*1.1]   # Denisty of Fuel
@@ -45,12 +44,28 @@ cool_density = 0.73                         # Coolant Density
 fuel_specific_power = 40.0 / 1000.0   # Power garnered from fuel [W / g]
 
 
+#############################
+### Lattice specification ###
+#############################
+unit_cell_pitch  = 0.65635 * 2.0
+dimension = "{0} {0}".format(unit_cell_pitch*4)
+lower_left = "{0} {0}".format(unit_cell_pitch*-2)
+lattice_str = """
+1 2 1 2
+2 1 2 1
+1 2 1 2
+2 1 2 1
+"""
+
 ###########################
 ### MCNPX Specification ###
 ###########################
 # coolant
 coolant = {10010: 2.0, 80160: 1.0}
 coolant_sab = "HH20"
+
+# cladding
+cladding = {400910: 0.99, 410930: 0.01}
 
 # LEU
 initial_heavy_metal = {     # Initial heavy metal mass fraction distribution
